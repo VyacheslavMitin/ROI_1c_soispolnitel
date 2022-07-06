@@ -5,10 +5,13 @@
 import time
 import pyautogui as pg
 from typing_unicode_str import copy_paste_text, typing_unicode_str
+# from check_kassa import checking_kassa, not_nds
+import check_kassa
+import working_contracts
 
 # Переменные
 RANGE = 30  # количество реализация
-TIMEOUT_SWITCH = 5  # пауза ожидания переключения на 1С
+TIMEOUT_SWITCH = 3  # пауза ожидания переключения на 1С
 
 print(f"Необходимо переключиться в 1С в течение {TIMEOUT_SWITCH} секунд")
 time.sleep(TIMEOUT_SWITCH)  # ожидание
@@ -32,9 +35,15 @@ for i in range(RANGE):
     time.sleep(0.5)
     pg.press('enter')  # выбрать соисполнителя
     time.sleep(0.5)
+    if check_kassa.checking_kassa() == 'Ульяновский участок пересчета':
+        check_kassa.not_nds()
+    time.sleep(0.5)
     select_name_soispolnitel()
     # input()
-    pg.hotkey('ctrl', 'enter')
+    working_contracts.paste_contract()
+    pg.click(x=830, y=326)  # клик на кнпку заполнения филиала и договора
+    time.sleep(0.5)
+    pg.hotkey('ctrl', 'enter')  # сохранение
     time.sleep(2)
     pg.press('down')  # спуск на строку ниже
     time.sleep(0.5)
