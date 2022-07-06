@@ -1,7 +1,8 @@
 # Модуль выделения строк в 1С Диадок для отправки
 
 # Импорты
-
+import keyboard
+import pyperclip
 import time
 import pyautogui as pg
 from typing_unicode_str import copy_paste_text, typing_unicode_str
@@ -26,7 +27,7 @@ def select_name_soispolnitel():
     time.sleep(0.5)
 
 
-for i in range(RANGE):
+def working_documents():
     pg.press('enter')  # войти в реализцию
     time.sleep(1)
     pg.click(x=1482, y=155)
@@ -49,4 +50,32 @@ for i in range(RANGE):
     time.sleep(0.5)
     # input()
 
-pg.alert("Завершено", "Завершено")  # окно об окончании
+
+def stepping_list():
+    pg.press('left', presses=10)
+    time.sleep(0.3)
+    pg.press('right', presses=2)
+    time.sleep(0.3)
+    keyboard.press_and_release('ctrl+c')
+    time.sleep(0.5)
+    firt = pyperclip.paste()
+    pg.press('down')
+    time.sleep(0.3)
+    keyboard.press_and_release('ctrl+c')
+    time.sleep(0.5)
+    second = pyperclip.paste()
+    if firt == second:
+        print("Строки для обработки кончились")
+        return False
+    else:
+        pg.press('up')
+        time.sleep(0.3)
+        working_documents()
+        return True
+
+
+if __name__ == '__main__':
+    while True:
+        if not stepping_list():
+            break
+    pg.alert("Завершено", "Завершено")  # окно об окончании
