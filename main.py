@@ -53,23 +53,24 @@ def working_documents():
 
 def stepping_list():
     pg.press('left', presses=10)
-    time.sleep(0.3)
+    time.sleep(0.5)
     pg.press('right', presses=2)
-    time.sleep(0.3)
+    time.sleep(0.5)
     keyboard.press_and_release('ctrl+c')
     time.sleep(0.5)
     firt = pyperclip.paste()
     pg.press('down')
-    time.sleep(0.3)
+    time.sleep(0.5)
     keyboard.press_and_release('ctrl+c')
     time.sleep(0.5)
     second = pyperclip.paste()
     if firt == second:
+        working_documents()
         print("Строки для обработки кончились")
         return False
     else:
         pg.press('up')
-        time.sleep(0.3)
+        time.sleep(0.5)
         working_documents()
         return True
 
