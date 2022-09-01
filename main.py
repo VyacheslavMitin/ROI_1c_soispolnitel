@@ -1,4 +1,4 @@
-# Модуль выделения строк в 1С Диадок для отправки
+# Модуль выделения строк в 1С Диадок для отправки, необходимо выставить английскую раскладку на обоих машинах
 
 # Импорты
 import keyboard
@@ -42,8 +42,9 @@ def working_documents():
     select_name_soispolnitel()
     # input()
     working_contracts.paste_contract()
-    pg.click(x=830, y=326)  # клик на кнпку заполнения филиала и договора
-    time.sleep(0.5)
+    time.sleep(3)
+    pg.click(x=830, y=326)  # клик на кнопку заполнения филиала и договора
+    time.sleep(3)
     pg.hotkey('ctrl', 'enter')  # сохранение
     time.sleep(2)
     pg.press('down')  # спуск на строку ниже
